@@ -62,17 +62,19 @@ describe('TAFKAL80ETC should: ', () => {
     });
 });
 
-/*describe('Sulfuras should: ', () => {
-    let shop;
-    beforeEach(() => {
-        shop = new Shop([new Item('Sulfuras, Hand of Ragnaros', 0, 0)]);
-    });
+describe('Sulfuras should: ', () => {
+    const itemName = 'Sulfuras, Hand of Ragnaros';
 
-    test('Aged', () => {
+    test('not change sellIn or quality props', () => {
+        const shop = new Shop([new Item(itemName, 0, 10)]);
+        const items = shop.updateQuality();
+        const res = [{name: itemName, sellIn: 0, quality: 10}];
+
+        expect(items).toEqual(res);
     });
 });
 
-describe('Other should: ', () => {
+/*describe('Other should: ', () => {
     test('have quality > 0', () => {
         const shop = new Shop([new Item('eggs', 1, 0)]);
     });
