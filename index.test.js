@@ -26,19 +26,43 @@ describe('Aged Brie should: ', () => {
     });
 });
 
-/* describe('TAFKAL80ETC should: ', () => {
+describe('TAFKAL80ETC should: ', () => {
     const itemName = 'Backstage passes to a TAFKAL80ETC concert';
 
-    test('Aged', () => {
-        const shop = new Shop([new Item(itemName, 0, 0)]);
+    test('have quality 0 if sellIn is 0', () => {
+        const shop = new Shop([new Item(itemName, 0, 10)]);
         const items = shop.updateQuality();
-        const res = [{name: itemName, sellIn: 2, quality: 50}];
+        const res = [{name: itemName, sellIn: -1, quality: 0}];
+
+        expect(items).toEqual(res);
+    });
+
+    test('inc quality +2 if sellIn is < 11', () => {
+        const shop = new Shop([new Item(itemName, 10, 10)]);
+        const items = shop.updateQuality();
+        const res = [{name: itemName, sellIn: 9, quality: 12}];
+
+        expect(items).toEqual(res);
+    });
+
+    test('inc quality +3 if sellIn is < 6', () => {
+        const shop = new Shop([new Item(itemName, 5, 10)]);
+        const items = shop.updateQuality();
+        const res = [{name: itemName, sellIn: 4, quality: 13}];
+
+        expect(items).toEqual(res);
+    });
+
+    test('have quality <= 50', () => {
+        const shop = new Shop([new Item(itemName, 5, 50)]);
+        const items = shop.updateQuality();
+        const res = [{name: itemName, sellIn: 4, quality: 50}];
 
         expect(items).toEqual(res);
     });
 });
 
-describe('Sulfuras should: ', () => {
+/*describe('Sulfuras should: ', () => {
     let shop;
     beforeEach(() => {
         shop = new Shop([new Item('Sulfuras, Hand of Ragnaros', 0, 0)]);
@@ -79,5 +103,4 @@ describe('Other should: ', () => {
     !Aged Brie && TAFKAL80ETC
         quality - quality
     Aged Brie && quality < 50
-        quality + 1
- */
+        quality + 1 */
