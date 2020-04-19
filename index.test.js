@@ -1,4 +1,5 @@
-const {Shop, Item} = require('./index');
+// const {Shop, Item} = require('./index');
+const {Shop, Item} = require('./refactor');
 
 describe('Aged Brie should: ', () => {
     test('increase quality', () => {
@@ -21,6 +22,14 @@ describe('Aged Brie should: ', () => {
         const shop = new Shop([new Item('Aged Brie', 0, 0)]);
         const items = shop.updateQuality();
         const res = [{name: 'Aged Brie', sellIn: -1, quality: 2}];
+
+        expect(items).toEqual(res);
+    });
+
+    test('inc quality twice if sellIn passed but stay <= 50', () => {
+        const shop = new Shop([new Item('Aged Brie', 0, 50)]);
+        const items = shop.updateQuality();
+        const res = [{name: 'Aged Brie', sellIn: -1, quality: 50}];
 
         expect(items).toEqual(res);
     });
