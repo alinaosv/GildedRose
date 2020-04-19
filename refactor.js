@@ -1,3 +1,10 @@
+const clamp = (range, item) => {
+    const [start, end] = range;
+    return item < start 
+        ? start 
+        : item > end  ? end : item;
+};
+
 class Item {
     constructor(name, sellIn, quality) {
         this.name = name;
@@ -9,15 +16,10 @@ class Item {
 class Shop {
     constructor(items = []) {
         this.items = items;
+        this.QUALITY_RANGE = [0, 50];
     }
-    updateQuality() {
-        const QUALITY_RANGE = [0, 50];
-        const clampQuality = item => {
-            const [start, end] = QUALITY_RANGE;
-            return item < start 
-                ? start 
-                : item > end  ? end : item;
-        };
+    updateQuality() { 
+        const clampQuality = quality => clamp(this.QUALITY_RANGE, quality);
 
         this.items = this.items.map(it => {
             if (it.name === 'Aged Brie')
