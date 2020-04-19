@@ -41,6 +41,13 @@ class Shop {
             if (it.name === 'Sulfuras, Hand of Ragnaros')
                 return it;
 
+            if (it.name === 'Conjured')
+                return {
+                    name: it.name,
+                    sellIn: it.sellIn - 1, 
+                    quality: clampQuality(it.sellIn > 0 ? it.quality - 2 : it.quality - 4)
+                };
+
             return {
                 name: it.name,
                 sellIn: it.sellIn - 1,
